@@ -34,6 +34,20 @@ class DecisionTree:
         # If you wish your code can have cases for different types of input and output data (discrete, real)
         # Use the functions from utils.py to find the optimal attribute to split upon and then construct the tree accordingly.
         # You may(according to your implemetation) need to call functions recursively to construct the tree. 
+        split_attr = opt_split_attribute(X,y,self.criterion,X.columns)
+        X_df = X
+        new_column_data = {"OUTPUT":y}
+        new_columns_df = pd.DataFrame(new_column_data)
+        result_df = pd.concat([X_df, new_columns_df], axis=1)
+
+        if not check_ifreal(split_attr):
+            splitvals = split_attr.unique()
+            for splitter in splitvals:
+                small_X_df = result_df[split_attr == splitter]
+                small_y = small_X_df["OUTPUT"]
+                small_X_df.drop(columns = ["OUTPUT",split_attr])
+                self.fit(small_X_df,small_y)
+
 
         pass
 

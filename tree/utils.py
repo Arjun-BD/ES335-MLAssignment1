@@ -120,7 +120,7 @@ def split_data(X: pd.DataFrame, y: pd.Series, attribute, value):
                 y_below.append(y.iloc[i])
     else:
         for i in range(n):
-            if X.iloc[i][attribute] != value:
+            if X.iloc[i][attribute] >= value:
                 X_above.append(X.iloc[i])
                 y_above.append(y.iloc[i])
             else:
