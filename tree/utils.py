@@ -10,14 +10,14 @@ def one_hot_encoding(X: pd.DataFrame) -> pd.DataFrame:
     """
     Function to perform one hot encoding on the input data
     """
-
+    return pd.get_dummies(X, dtype = "int64")
     pass
 
 def check_ifreal(y: pd.Series) -> bool:
     """
     Function to check if the given series has real or discrete values
     """
-    if y.dtype == "int64" or y.dtype == "float64":
+    if y.dtype == "categorical":
         return True
     else:
         return False
