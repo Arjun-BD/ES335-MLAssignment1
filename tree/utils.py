@@ -112,7 +112,7 @@ def split_data(X: pd.DataFrame, y: pd.Series, attribute, value):
     y_below = []
     if check_ifreal(X[attribute]) == False:
         for i in range(n):
-            if X.iloc[i][attribute] == value:
+            if X.iloc[i][attribute] > value:
                 X_above.append(X.iloc[i])
                 y_above.append(y.iloc[i])
             else:
@@ -131,6 +131,9 @@ def split_data(X: pd.DataFrame, y: pd.Series, attribute, value):
     y_above = pd.Series(y_above, index=X_above.index)
     X_below = pd.DataFrame(X_below, columns=X.columns)
     y_below = pd.Series(y_below, index=X_below.index)
+
+    X_above.drop(attribute, axis = 1)
+    X_below.drop(attribute, axis = 1)
         
     return X_above, y_above, X_below, y_below
 

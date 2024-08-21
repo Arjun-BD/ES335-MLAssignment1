@@ -21,7 +21,7 @@ class Node:
     left : Optional['Node'] = None
     right : Optional['Node'] = None
     split_on : Optional[str] = None
-    value : Optional[str] = None
+    value : Optional[any] = None
 
 @dataclass
 class DecisionTreeClassifier:
@@ -40,19 +40,32 @@ class DecisionTreeClassifier:
         """
         Function to train and construct the decision tree
         """
-        if(self.curr_depth == 0):
-            currNode.value = y.mode()
+        
+        if(self.curr_depth == 0 or X.empty):
+            if not len(y) == 0 : 
+                currNode.value = (y.mode())[0]
+            return
+        
+        ###fix the above code, when y is containing all same elements, decision is made and further splits should not happen
         if(self.curr_depth == self.max_depth):
             self.rootNode = Node()
             currNode = self.rootNode
+
+        if(len(set(list(y))) == 1): 
+            currNode.value = y.mode()[0]
+            return 
+
         # If you wish your code can have cases for different types of input and output data (discrete, real)
         # Use the functions from utils.py to find the optimal attribute to split upon and then construct the tree accordingly.
         # You may(according to your implemetation) need to call functions recursively to construct the tree. 
+        # if(len(list(y)) == len(set(list(y)))):
+        #     # currNode.value = y.mode()[0]
+        #     return 
         split_attr = opt_split_attribute(X,y,self.criterion,X.columns)
         X_true, y_true, X_false , y_false = split_data(X, y , split_attr, 0.5)
         currNode.split_on = split_attr
         currNode.left = Node()
-        currNode.rigt = Node()
+        currNode.right = Node()
         self.curr_depth -= 1 
         self.fit(X_true, y_true, currNode.left)
         self.fit(X_false, y_false, currNode.right)        
@@ -60,7 +73,7 @@ class DecisionTreeClassifier:
 
         pass
 
-    def predict(self, X: pd.DataFrame) -> pd.Series:
+    def predict(self, X: pd.DataFrame) -> list:
         """
         Funtion to run the decision tree on test inputs
         """
@@ -68,14 +81,14 @@ class DecisionTreeClassifier:
         for index, row in X.iterrows():
             node = self.rootNode
             while node.left is not None and node.right is not None:
-                if row[node.split_on] < 0.5:
+                if row[node.split_on] > 0.5:
                     node = node.left
                 else:
                     node = node.right
 
             y.append(node.value)
 
-        return pd.Series(y)
+        return y
         # Traverse the tree you constructed to return the predicted values for the given test inputs.
         pass
 
@@ -92,3 +105,5 @@ class DecisionTreeClassifier:
         Where Y => Yes and N => No
         """
         pass
+
+
