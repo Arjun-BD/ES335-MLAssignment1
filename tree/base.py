@@ -58,9 +58,6 @@ class DecisionTreeClassifier:
         # If you wish your code can have cases for different types of input and output data (discrete, real)
         # Use the functions from utils.py to find the optimal attribute to split upon and then construct the tree accordingly.
         # You may(according to your implemetation) need to call functions recursively to construct the tree. 
-        # if(len(list(y)) == len(set(list(y)))):
-        #     # currNode.value = y.mode()[0]
-        #     return 
         split_attr = opt_split_attribute(X,y,self.criterion,X.columns)
         X_true, y_true, X_false , y_false = split_data(X, y , split_attr, 0.5)
         currNode.split_on = split_attr
@@ -92,7 +89,7 @@ class DecisionTreeClassifier:
         # Traverse the tree you constructed to return the predicted values for the given test inputs.
         pass
 
-    def plot(self) -> None:
+    def plot(self, node : Node = None, indent : str = "") -> None:
         """
         Function to plot the tree
 
@@ -104,6 +101,20 @@ class DecisionTreeClassifier:
             N: Class C
         Where Y => Yes and N => No
         """
-        pass
+        if node is None:
+            node = self.rootNode           
 
+        if node.value is not None:
+            print("Class: ", node.value)
+            return
+        
+        print("?(" + node.split_on + ")")
+        indent += "   "
+    
+        print(indent + " Y:", end='  ')
+        self.plot(node.left, indent + "  ")
 
+    
+        print(indent + " N:", end='  ')
+        self.plot(node.right, indent + "  ")
+       
