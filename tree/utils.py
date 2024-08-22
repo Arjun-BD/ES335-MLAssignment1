@@ -52,7 +52,7 @@ def information_gain(Y: pd.Series, attr: pd.Series, criterion: str) -> float:
         weighted_entropy = sum((len(subset) / len(Y)) * entropy(subset) for _, subset in Y.groupby(attr))
         return total_entropy - weighted_entropy
 
-    elif criterion == 'gini':
+    elif criterion == 'gini_index':
         total_gini = gini_index(Y)
         weighted_gini = sum((len(subset) / len(Y)) * gini_index(subset) for _, subset in Y.groupby(attr))
         return total_gini - weighted_gini
@@ -86,7 +86,6 @@ def opt_split_attribute(X: pd.DataFrame, y: pd.Series, criterion, features: pd.S
         #         maxattr = attr
 
         # return maxattr
-    
     
     maxattr = None
     maxgain = -float('inf')
