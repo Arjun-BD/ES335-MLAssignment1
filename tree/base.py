@@ -12,7 +12,7 @@ from typing import Literal, Optional
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from utils import *
+from tree.utils import *
 
 np.random.seed(42)
 
@@ -52,13 +52,13 @@ class DecisionTree:
                 else : currNode.value = y.mean()
             return
         
-        ###fix the above code, when y is containing all same elements, decision is made and further splits should not happen
         if(self.curr_depth == self.max_depth):
             self.rootNode = Node()
             currNode = self.rootNode
 
-        if(len(set(list(y))) == 1): 
-            currNode.value = y.mode()[0]
+        if(len(set(y.to_list())) == 1): 
+            if(self.Type == "Classification") : currNode.value = y.mode()[0]
+            else : currNode.value = y.mean()
             return 
 
         # If you wish your code can have cases for different types of input and output data (discrete, real)
@@ -92,7 +92,7 @@ class DecisionTree:
 
             y.append(node.value)
 
-        return y
+        return pd.Series(y)
         # Traverse the tree you constructed to return the predicted values for the given test inputs.
         pass
 
@@ -115,7 +115,7 @@ class DecisionTree:
             print(node.value)
             return
         
-        if(not self.discrete_features): print("?(" + node.split_on + ">" + str(node.split_value) +  ")")
+        if(not self.discrete_features): print("?(" + str(node.split_on) + ">" + str(node.split_value) +  ")")
         else : print("?( is " + node.split_on + ")")
         indent += "   "
     
@@ -128,12 +128,12 @@ class DecisionTree:
        
 
 
-X = pd.DataFrame({'color' : ['r', 'g', 'b']})
-Y = pd.Series([1, 2, 3])
-classifier = DecisionTree(max_depth=2, Type = "Regression", criterion="entropy", discrete_features=True)
-X = classifier.encode_discrete(X)
-classifier.fit(X, Y)
-X_ = pd.DataFrame({'color' : ['g', 'b']})
-X_ = classifier.encode_discrete(X_)
-print(classifier.predict(X_))
-classifier.plot()
+# X = pd.DataFrame({'color' : ['r', 'g', 'b']})
+# Y = pd.Series([1, 2, 3])
+# classifier = DecisionTree(max_depth=2, Type = "Regression", criterion="entropy", discrete_features=True)
+# X = classifier.encode_discrete(X)
+# classifier.fit(X, Y)
+# X_ = pd.DataFrame({'color' : ['g', 'b']})
+# X_ = classifier.encode_discrete(X_)
+# print(classifier.predict(X_))
+# classifier.plot()
