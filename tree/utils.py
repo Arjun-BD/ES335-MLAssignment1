@@ -30,6 +30,7 @@ def entropy(Y: pd.Series) -> float:
     Function to calculate the entropy
     """
     probabilities = Y.value_counts(normalize=True)
+    probabilities[probabilities == 0] = 1
     return -np.sum(probabilities * np.log2(probabilities))
     pass
 
@@ -106,9 +107,6 @@ def opt_split_attribute(X: pd.DataFrame, y: pd.Series, criterion, features: pd.S
 
     pass
 
-def split_value(X: pd.DataFrame, y : pd.Series, attribute):
-    X_column = X[attribute]
-    X_column
 
 
 def split_data(X: pd.DataFrame, y: pd.Series, attribute, value, discrete : bool):
@@ -129,17 +127,8 @@ def split_data(X: pd.DataFrame, y: pd.Series, attribute, value, discrete : bool)
     y_above = []
     X_below = []
     y_below = []
-    if check_ifreal(X[attribute]) == False:
-        for i in range(n):
+    for i in range(n):
             if X.iloc[i][attribute] > value:
-                X_above.append(X.iloc[i])
-                y_above.append(y.iloc[i])
-            else:
-                X_below.append(X.iloc[i])
-                y_below.append(y.iloc[i])
-    else:
-        for i in range(n):
-            if X.iloc[i][attribute] >= value:
                 X_above.append(X.iloc[i])
                 y_above.append(y.iloc[i])
             else:

@@ -65,6 +65,10 @@ class DecisionTree:
         # Use the functions from utils.py to find the optimal attribute to split upon and then construct the tree accordingly.
         # You may(according to your implemetation) need to call functions recursively to construct the tree. 
         split_attr, split_point = opt_split_attribute(X,y,self.criterion,X.columns)
+        if(split_attr is None):
+            if(self.Type == "Classification") : currNode.value = y.mode()[0]
+            else : currNode.value = y.mean()
+            return 
         X_true, y_true, X_false , y_false = split_data(X, y , split_attr, split_point, discrete = self.discrete_features)
         currNode.split_on = split_attr
         currNode.split_value = split_point
