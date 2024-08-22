@@ -112,7 +112,7 @@ def split_value(X: pd.DataFrame, y : pd.Series, attribute):
     X_column
 
 
-def split_data(X: pd.DataFrame, y: pd.Series, attribute, value):
+def split_data(X: pd.DataFrame, y: pd.Series, attribute, value, discrete : bool):
     """
     Funtion to split the data according to an attribute.
     If needed you can split this function into 2, one for discrete and one for real valued features.
@@ -152,8 +152,9 @@ def split_data(X: pd.DataFrame, y: pd.Series, attribute, value):
     X_below = pd.DataFrame(X_below, columns=X.columns)
     y_below = pd.Series(y_below, index=X_below.index)
 
-    X_above.drop(attribute, axis = 1, inplace= True)
-    X_below.drop(attribute, axis = 1, inplace= True)
+    if(discrete):
+        X_above.drop(attribute, axis = 1, inplace= True)
+        X_below.drop(attribute, axis = 1, inplace= True)
         
     return X_above, y_above, X_below, y_below
 

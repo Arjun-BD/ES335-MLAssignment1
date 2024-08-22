@@ -28,6 +28,7 @@ class Node:
 class DecisionTreeClassifier:
     criterion: Literal["entropy", "gini_index"]  # criterion won't be used for regression
     max_depth: int  # The maximum depth the tree can grow to
+    discrete_features : bool = False
 
     def __init__(self, criterion, max_depth=5):
         self.criterion = criterion
@@ -35,6 +36,7 @@ class DecisionTreeClassifier:
         self.curr_depth = max_depth
 
     def encode_discrete(self, X: pd.DataFrame):
+         self.discrete_features = True
          return one_hot_encoding(X)
     
     def fit(self, X: pd.DataFrame, y: pd.Series, currNode : Node = None) -> None:
@@ -60,7 +62,7 @@ class DecisionTreeClassifier:
         # Use the functions from utils.py to find the optimal attribute to split upon and then construct the tree accordingly.
         # You may(according to your implemetation) need to call functions recursively to construct the tree. 
         split_attr, split_point = opt_split_attribute(X,y,self.criterion,X.columns)
-        X_true, y_true, X_false , y_false = split_data(X, y , split_attr, split_point)
+        X_true, y_true, X_false , y_false = split_data(X, y , split_attr, split_point, discrete = self.discrete_features)
         currNode.split_on = split_attr
         currNode.split_value = split_point
         currNode.left = Node()
@@ -110,7 +112,8 @@ class DecisionTreeClassifier:
             print("Class: ", node.value)
             return
         
-        print("?(" + node.split_on + ")")
+        if(not self.discrete_features): print("?(" + node.split_on + ">" + str(node.split_value) +  ")")
+        else : print("?(" + node.split_on + ")")
         indent += "   "
     
         print(indent + " Y:", end='  ')
