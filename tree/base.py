@@ -22,6 +22,7 @@ class Node:
     right : Optional['Node'] = None
     split_on : Optional[str] = None
     value : Optional[any] = None
+    split_value : Optional[int] = None
 
 @dataclass
 class DecisionTreeClassifier:
@@ -58,9 +59,10 @@ class DecisionTreeClassifier:
         # If you wish your code can have cases for different types of input and output data (discrete, real)
         # Use the functions from utils.py to find the optimal attribute to split upon and then construct the tree accordingly.
         # You may(according to your implemetation) need to call functions recursively to construct the tree. 
-        split_attr = opt_split_attribute(X,y,self.criterion,X.columns)
-        X_true, y_true, X_false , y_false = split_data(X, y , split_attr, 0.5)
+        split_attr, split_point = opt_split_attribute(X,y,self.criterion,X.columns)
+        X_true, y_true, X_false , y_false = split_data(X, y , split_attr, split_point)
         currNode.split_on = split_attr
+        currNode.split_value = split_point
         currNode.left = Node()
         currNode.right = Node()
         self.curr_depth -= 1 
@@ -78,7 +80,7 @@ class DecisionTreeClassifier:
         for index, row in X.iterrows():
             node = self.rootNode
             while node.left is not None and node.right is not None:
-                if row[node.split_on] > 0.5:
+                if row[node.split_on] > node.split_value:
                     node = node.left
                 else:
                     node = node.right
@@ -118,3 +120,11 @@ class DecisionTreeClassifier:
         print(indent + " N:", end='  ')
         self.plot(node.right, indent + "  ")
        
+
+X = pd.DataFrame({'size' : [1,2,3]})
+Y = pd.Series(['apple', 'guava', 'banana'])
+classifier = DecisionTreeClassifier(criterion="entropy")
+# X = classifier.encode_discrete(X)
+classifier.fit(X, Y)
+print(classifier.predict(X))
+classifier.plot()
