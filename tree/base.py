@@ -31,14 +31,14 @@ class DecisionTree:
     max_depth: int  # The maximum depth the tree can grow to
     discrete_features : bool = False
 
-    def __init__(self, criterion, Type, max_depth=5):
+    def __init__(self, criterion, Type, discrete_features, max_depth=5):
         self.criterion = criterion
         self.max_depth = max_depth
         self.curr_depth = max_depth
+        self.discrete_features = discrete_features
         self.Type = Type
 
     def encode_discrete(self, X: pd.DataFrame):
-         self.discrete_features = True
          return one_hot_encoding(X)
     
     def fit(self, X: pd.DataFrame, y: pd.Series, currNode : Node = None) -> None:
@@ -130,7 +130,7 @@ class DecisionTree:
 
 X = pd.DataFrame({'color' : ['r', 'g', 'b']})
 Y = pd.Series([1, 2, 3])
-classifier = DecisionTree(max_depth=2, Type = "Regression", criterion="entropy")
+classifier = DecisionTree(max_depth=2, Type = "Regression", criterion="entropy", discrete_features=True)
 X = classifier.encode_discrete(X)
 classifier.fit(X, Y)
 X_ = pd.DataFrame({'color' : ['g', 'b']})
