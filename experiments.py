@@ -38,6 +38,8 @@ def generate_fake_data(type : str , N : int , M : int):
 # ...
 def calc_time(type : str, N : int , M : int, depth : int):
     X, y = generate_fake_data(type, N, M)
+    print(X)
+    print(y)
     if(type == "DIRO" or type == "RIRO"):
         t = "Regression"
         criterion = "mse"
@@ -77,7 +79,7 @@ def plot_results_vary_n(n : list, j : str):
         results_fit = []
         results_predict = []
         for i in n:
-            time_fit, time_predict = calc_time(j, i, 10, depth=10)
+            time_fit, time_predict = calc_time(j, N = i,  M = 10, depth=10)
             results_fit.append(time_fit)
             results_predict.append(time_predict)
             print("done")
@@ -119,7 +121,7 @@ def plot_results_vary_m(n : list, j : str):
     
         plt.show()
 
-plot_results_vary_n(n, "DIRO")
+plot_results_vary_n(n, "RIDO")
 # ...
 # Other functions
 # ...
