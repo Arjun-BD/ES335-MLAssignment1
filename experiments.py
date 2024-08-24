@@ -17,7 +17,7 @@ def generate_fake_data(type : str , N : int , M : int):
         y = pd.Series(np.random.randn(N))
         
     elif(type == "DIRO"):
-        X = pd.DataFrame({i: pd.Series(np.random.randint(2, size=M), dtype="category") for i in range(N)})
+        X = pd.DataFrame({i: pd.Series(np.random.randint(2, size=M)) for i in range(N)})
         y = pd.Series(np.random.randn(N))
     
     elif(type == "RIDO"):
@@ -25,7 +25,7 @@ def generate_fake_data(type : str , N : int , M : int):
         y = pd.Series(np.random.randint(2, size=N), dtype="category")
 
     elif(type == "DIDO"):
-        X = pd.DataFrame({i: pd.Series(np.random.randint(2, size=M), dtype="category") for i in range(N)})
+        X = pd.DataFrame({i: pd.Series(np.random.randint(2, size=M)) for i in range(N)})
         y  = pd.Series(np.random.randint(2, size=N), dtype="category")
 
     else:
@@ -51,9 +51,8 @@ def calc_time(type : str, N : int , M : int, depth : int):
         discrete = False
 
     times_learn = []
-    classifier = DecisionTree(Type = t , criterion= criterion, discrete_features= discrete, max_depth = depth)
-    if(discrete):
-            X = classifier.encode_discrete(X)
+    classifier = DecisionTree(Type = t , criterion = criterion, discrete_features= discrete, max_depth = depth)
+
     for i in range(100):
         start = time.perf_counter()
         classifier.fit(X, y)
@@ -97,8 +96,30 @@ def plot_results_vary_n(n : list, j : str):
     
         plt.show()
 
+def plot_results_vary_m(n : list, j : str):
+        results_fit = []
+        results_predict = []
+        for i in n:
+            time_fit, time_predict = calc_time(j, 20 , i , depth = float('inf'))
+            results_fit.append(time_fit)
+            results_predict.append(time_predict)
+            print("done")
 
-plot_results_vary_n(n, "DIDO")
+        plt.figure(figsize=(10,10))
+        plt.plot(n, results_fit)
+        plt.title("M is varied, keeping N constant at value 20")
+        plt.xlabel("N")
+        plt.ylabel(f"Time taken to learn the decision tree, type = {j}")
+  
+        plt.figure(figsize=(10,10))
+        plt.plot(n, results_predict)
+        plt.title("M is varied, keeping N constant at value 20")
+        plt.xlabel("N")
+        plt.ylabel(f"Time taken to for the decision tree to predict, type = {j}")
+    
+        plt.show()
+
+plot_results_vary_n(n, "DIRO")
 # ...
 # Other functions
 # ...
