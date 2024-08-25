@@ -46,23 +46,23 @@ class DecisionTree:
         Function to train and construct the decision tree
         """
         
-        if(self.curr_depth == 0 or X.empty): #checks if all features are used or if the data is empty
+        if(self.curr_depth == 0 or X.empty): #check if depth has been reached or if the data is empty
             if not len(y) == 0 : 
                 if(self.Type == "Classification") : currNode.value = (y.mode())[0]
                 else : currNode.value = y.mean()
             return
         
-        if(self.curr_depth == self.max_depth): #checks if we are at the root node and then initializes the root node
+        if(self.curr_depth == self.max_depth): #check if we are at the root node and then initialize the root node
             self.rootNode = Node()
             currNode = self.rootNode
 
-        if(len(set(y.to_list())) == 1): #checks if all the labels are the same, so we can stop splitting
+        if(len(set(y.to_list())) == 1): #check if all the labels are the same, so we can stop splitting
             if(self.Type == "Classification") : currNode.value = y.mode()[0]
             else : currNode.value = y.mean()
             return 
 
     
-        split_attr, split_point = opt_split_attribute(X,y,self.criterion,X.columns) #finds the best attribute to split on
+        split_attr, split_point = opt_split_attribute(X,y,self.criterion,X.columns) #find the best attribute to split on
         if(split_attr is None):
             if(self.Type == "Classification") : currNode.value = y.mode()[0]
             else : currNode.value = y.mean()
@@ -73,7 +73,7 @@ class DecisionTree:
         currNode.left = Node()
         currNode.right = Node()
         self.curr_depth -= 1                                         
-        self.fit(X_true, y_true, currNode.left)         #recursively calls the fit function on the left and right nodes
+        self.fit(X_true, y_true, currNode.left)#recursively call the fit function on the left and right nodes
         self.fit(X_false, y_false, currNode.right)        
         self.curr_depth += 1
 
@@ -84,7 +84,7 @@ class DecisionTree:
         Funtion to run the decision tree on test inputs
         """
         y = []
-        for index, row in X.iterrows(): #iterates over the rows of the test data and traverses the tree to find the predicted value
+        for index, row in X.iterrows(): #iterate over the rows of the test data and traverse the tree to find the predicted value
             node = self.rootNode
             while node.left is not None and node.right is not None:
                 if row[node.split_on] > node.split_value:
