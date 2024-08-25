@@ -17,7 +17,7 @@ from tree.utils import *
 np.random.seed(42)
 
 @dataclass
-class Node:
+class Node: #class to represent the nodes of the decision tree
     left : Optional['Node'] = None
     right : Optional['Node'] = None
     split_on : Optional[str] = None
@@ -38,7 +38,7 @@ class DecisionTree:
         self.discrete_features = discrete_features
         self.Type = Type
 
-    def encode_discrete(self, X: pd.DataFrame):
+    def encode_discrete(self, X: pd.DataFrame): #performs one hot encoding on the discrete features
          return one_hot_encoding(X)
     
     def fit(self, X: pd.DataFrame, y: pd.Series, currNode : Node = None) -> None:
@@ -46,25 +46,23 @@ class DecisionTree:
         Function to train and construct the decision tree
         """
         
-        if(self.curr_depth == 0 or X.empty):
+        if(self.curr_depth == 0 or X.empty): #checks if all features are used or if the data is empty
             if not len(y) == 0 : 
                 if(self.Type == "Classification") : currNode.value = (y.mode())[0]
                 else : currNode.value = y.mean()
             return
         
-        if(self.curr_depth == self.max_depth):
+        if(self.curr_depth == self.max_depth): #checks if we are at the root node and then initializes the root node
             self.rootNode = Node()
             currNode = self.rootNode
 
-        if(len(set(y.to_list())) == 1): 
+        if(len(set(y.to_list())) == 1): #checks if all the labels are the same, so we can stop splitting
             if(self.Type == "Classification") : currNode.value = y.mode()[0]
             else : currNode.value = y.mean()
             return 
 
-        # If you wish your code can have cases for different types of input and output data (discrete, real)
-        # Use the functions from utils.py to find the optimal attribute to split upon and then construct the tree accordingly.
-        # You may(according to your implemetation) need to call functions recursively to construct the tree. 
-        split_attr, split_point = opt_split_attribute(X,y,self.criterion,X.columns)
+    
+        split_attr, split_point = opt_split_attribute(X,y,self.criterion,X.columns) #finds the best attribute to split on
         if(split_attr is None):
             if(self.Type == "Classification") : currNode.value = y.mode()[0]
             else : currNode.value = y.mean()
@@ -74,8 +72,8 @@ class DecisionTree:
         currNode.split_value = split_point
         currNode.left = Node()
         currNode.right = Node()
-        self.curr_depth -= 1 
-        self.fit(X_true, y_true, currNode.left)
+        self.curr_depth -= 1                                         
+        self.fit(X_true, y_true, currNode.left)         #recursively calls the fit function on the left and right nodes
         self.fit(X_false, y_false, currNode.right)        
         self.curr_depth += 1
 
@@ -86,7 +84,7 @@ class DecisionTree:
         Funtion to run the decision tree on test inputs
         """
         y = []
-        for index, row in X.iterrows():
+        for index, row in X.iterrows(): #iterates over the rows of the test data and traverses the tree to find the predicted value
             node = self.rootNode
             while node.left is not None and node.right is not None:
                 if row[node.split_on] > node.split_value:
@@ -97,20 +95,14 @@ class DecisionTree:
             y.append(node.value)
 
         return pd.Series(y)
-        # Traverse the tree you constructed to return the predicted values for the given test inputs.
         pass
 
     def plot(self, node : Node = None, indent : str = "") -> None:
         """
         Function to plot the tree
-
-        Output Example:
-        ?(X1 > 4)
-            Y: ?(X2 > 7)
-                Y: Class A
-                N: Class B
-            N: Class C
-        Where Y => Yes and N => No
+        Note that , 
+        Y : Yes
+        N : No
         """
         if node is None:
             node = self.rootNode           
@@ -132,12 +124,4 @@ class DecisionTree:
        
 
 
-# X = pd.DataFrame({'color' : ['r', 'g', 'b']})
-# Y = pd.Series([1, 2, 3])
-# classifier = DecisionTree(max_depth=2, Type = "Regression", criterion="entropy", discrete_features=True)
-# X = classifier.encode_discrete(X)
-# classifier.fit(X, Y)
-# X_ = pd.DataFrame({'color' : ['g', 'b']})
-# X_ = classifier.encode_discrete(X_)
-# print(classifier.predict(X_))
-# classifier.plot()
+
