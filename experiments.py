@@ -12,6 +12,7 @@ num_average_time = 100  # Number of times to run each experiment to calculate th
 # Function to create fake data (take inspiration from usage.py)
 # ...
 def generate_fake_data(type : str , N : int , M : int):
+    np.random.seed(42)
     if(type == 'RIRO'):
         X = pd.DataFrame(np.random.randn(N, M))
         y = pd.Series(np.random.randn(N))
@@ -37,9 +38,8 @@ def generate_fake_data(type : str , N : int , M : int):
 # Function to calculate average time (and std) taken by fit() and predict() for different N and P for 4 different cases of DTs
 # ...
 def calc_time(type : str, N : int , M : int, depth : int):
+    np.random.seed(42)
     X, y = generate_fake_data(type, N, M)
-    print(X)
-    print(y)
     if(type == "DIRO" or type == "RIRO"):
         t = "Regression"
         criterion = "mse"
@@ -76,6 +76,7 @@ m = [5,10,15,20,25]
 
 # Function to plot the results
 def plot_results_vary_n(n : list, j : str):
+        np.random.seed(42)
         results_fit = []
         results_predict = []
         for i in n:
@@ -99,6 +100,7 @@ def plot_results_vary_n(n : list, j : str):
         plt.show()
 
 def plot_results_vary_m(n : list, j : str):
+        np.random.seed(42)
         results_fit = []
         results_predict = []
         for i in n:
@@ -123,6 +125,8 @@ def plot_results_vary_m(n : list, j : str):
 
 plot_results_vary_m(m, "DIDO")
 # ...
+
+
 # Other functions
 # ...
 # Run the functions, Learn the DTs and Show the results/plots
