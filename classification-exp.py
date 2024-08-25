@@ -14,6 +14,7 @@ X, y = make_classification(
 
 # For plotting
 plt.scatter(X[:, 0], X[:, 1], c=y)
+print(X[:, 0])
 # Write the code for Q2 a) and b) below. Show your results.
 
 X = pd.DataFrame(X, columns=["x1", "x2"])
@@ -25,10 +26,25 @@ classifier.fit(X_train, y_train)
 res = classifier.predict(X_test)
 
 y_test = y_test.reset_index(drop = True)
+
+print("Below are the results using entropy as the criterion and max_depth as 10")
 print("The accuracy is " , accuracy(y_test, res))
 print("The precision in predicting Class 0 is ", precision(y_test, res, 0))
 print("The precision in predicting Class 1 is ", precision(y_test, res, 1))
 print("The recall in predicting Class 0 is ", recall(y_test, res, 0))
 print("The recall in predicting Class 1 is ",recall(y_test, res, 1))
+print("Below are the results using gini index as the criterion and max_depth as 10")
+
+
+classifier = DecisionTree(max_depth=10, criterion="gini_index", Type="Classification", discrete_features=False)
+classifier.fit(X_train, y_train)
+res = classifier.predict(X_test)
+print("The accuracy is " , accuracy(y_test, res))
+print("The precision in predicting Class 0 is ", precision(y_test, res, 0))
+print("The precision in predicting Class 1 is ", precision(y_test, res, 1))
+print("The recall in predicting Class 0 is ", recall(y_test, res, 0))
+print("The recall in predicting Class 1 is ",recall(y_test, res, 1))
+
+
 
 
