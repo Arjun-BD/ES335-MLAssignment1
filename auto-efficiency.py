@@ -27,10 +27,13 @@ classifier = DecisionTree(max_depth = 10, criterion="mse", Type="Regression", di
 classifier.fit(X_train, y_train)
 res = classifier.predict(X_test)
 
-print(rmse(res, y_test))
+print("Root mean square error for our implementation of the decision tree" ,rmse(res, y_test))
+print("Mean absolute error for our implementation of the decision tree" ,mae(res, y_test))
+
 cls = DecisionTreeRegressor(max_depth=10)
 cls.fit(X_train, y_train)
 res = cls.predict(X_test)
 
 y_test = y_test.reset_index(drop = True)
-print(rmse(y_test, res))
+print("Root mean square error for sklearn decision tree",rmse(y_test, res))
+print("Mean absolute error for sklearn decision tree" ,mae(res, y_test))

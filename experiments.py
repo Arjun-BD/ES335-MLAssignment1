@@ -17,16 +17,16 @@ def generate_fake_data(type : str , N : int , M : int):
         y = pd.Series(np.random.randn(N))
         
     elif(type == "DIRO"):
-        X = pd.DataFrame({i: pd.Series(np.random.randint(2, size=M)) for i in range(N)})
+        X = pd.DataFrame({i: pd.Series(np.random.randint(2, size=N)) for i in range(M)})
         y = pd.Series(np.random.randn(N))
     
     elif(type == "RIDO"):
         X = pd.DataFrame(np.random.randn(N, M))
-        y = pd.Series(np.random.randint(2, size=N), dtype="category")
+        y = pd.Series(np.random.randint(M, size=N), dtype="category")
 
     elif(type == "DIDO"):
-        X = pd.DataFrame({i: pd.Series(np.random.randint(2, size=M)) for i in range(N)})
-        y  = pd.Series(np.random.randint(2, size=N), dtype="category")
+        X = pd.DataFrame({i: pd.Series(np.random.randint(2, size=N)) for i in range(M)})
+        y  = pd.Series(np.random.randint(M, size=N), dtype="category")
 
     else:
         raise ValueError
@@ -79,7 +79,7 @@ def plot_results_vary_n(n : list, j : str):
         results_fit = []
         results_predict = []
         for i in n:
-            time_fit, time_predict = calc_time(j, N = i,  M = 10, depth=10)
+            time_fit, time_predict = calc_time(type = j, N = i,  M = 10, depth=10)
             results_fit.append(time_fit)
             results_predict.append(time_predict)
             print("done")
@@ -102,7 +102,7 @@ def plot_results_vary_m(n : list, j : str):
         results_fit = []
         results_predict = []
         for i in n:
-            time_fit, time_predict = calc_time(j, 20 , i , depth = float('inf'))
+            time_fit, time_predict = calc_time(type = j, N = 20 , M = i , depth = float('inf'))
             results_fit.append(time_fit)
             results_predict.append(time_predict)
             print("done")
@@ -121,7 +121,7 @@ def plot_results_vary_m(n : list, j : str):
     
         plt.show()
 
-plot_results_vary_n(n, "RIDO")
+plot_results_vary_m(m, "DIDO")
 # ...
 # Other functions
 # ...
