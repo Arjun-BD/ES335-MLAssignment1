@@ -12,7 +12,32 @@ data.drop(columns=["car name"], inplace=True)
 
 ```
 
-The data was then split into training and testing data in a 70 : 30 split and trained on our implementation of the decision tree and sklearn. The results we obtained are as follows.
+The data was then split into training and testing data in a 70 : 30 split and trained on our implementation of the decision tree and sklearn.The code for the same can be found below.
+
+```python
+X_train , X_test, y_train, y_test = train_test_split(data.iloc[:, 1:], data["mpg"], test_size = 0.3, random_state = 42)
+y_test = y_test.reset_index(drop = True)
+y_train = y_train.reset_index(drop = True)
+
+classifier = DecisionTree(max_depth = 10, criterion="mse", Type="Regression", discrete_features=False)
+classifier.fit(X_train, y_train)
+res = classifier.predict(X_test)
+
+print("Root mean square error for our implementation of the decision tree" ,rmse(res, y_test))
+print("Mean absolute error for our implementation of the decision tree" ,mae(res, y_test))
+
+cls = DecisionTreeRegressor(max_depth=10)
+cls.fit(X_train, y_train)
+res = cls.predict(X_test)
+
+y_test = y_test.reset_index(drop = True)
+print("Root mean square error for sklearn decision tree",rmse(y_test, res))
+print("Mean absolute error for sklearn decision tree" ,mae(res, y_test))
+
+
+```
+
+The results we obtained are as follows.
 
 <img src = "../Graphs/auto_efficiency_results.png"/>
 
