@@ -6,8 +6,6 @@ Two types of experiments have been performed, one by varying **N** in the range 
 
 We will observe and discuss all these results below. The code used in obtaining all these graphs can be found in `experiments.py`
 
-**NOTE** : At smaller values, the graphs of $x \times 2^x$ and $x$ look similar.
-
 ## Discrete input Discrete output
 
 <p float="left">
