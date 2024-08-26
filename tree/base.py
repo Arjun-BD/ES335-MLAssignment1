@@ -45,6 +45,10 @@ class DecisionTree:
         """
         Function to train and construct the decision tree
         """
+
+        if(self.curr_depth == self.max_depth): #check if we are at the root node and then initialize the root node
+            self.rootNode = Node()
+            currNode = self.rootNode
         
         if(self.curr_depth == 0 or X.empty): #check if depth has been reached or if the data is empty
             if not len(y) == 0 : 
@@ -52,9 +56,6 @@ class DecisionTree:
                 else : currNode.value = y.mean()
             return
         
-        if(self.curr_depth == self.max_depth): #check if we are at the root node and then initialize the root node
-            self.rootNode = Node()
-            currNode = self.rootNode
 
         if(len(set(y.to_list())) == 1): #check if all the labels are the same, so we can stop splitting
             if(self.Type == "Classification") : currNode.value = y.mode()[0]
