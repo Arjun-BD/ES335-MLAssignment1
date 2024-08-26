@@ -107,7 +107,7 @@ def crossvalidation(X, y):
 
 <li>After iterating through all the validataion folds, we find the optimal depth for a decision tree for that fold by taking the mean across the accuracies of the predicted values given on each of the validataion folds</li>
 
-<li>After figuring out the optimal depth, a new decision tree of the optimal dpeth is trained on both the train and validatation set. This decision tree is then tested for accuract\y on the test set, and this accuracy is reported</li>
+<li>After figuring out the optimal depth, a new decision tree of the optimal depth is trained on both the train and validatation set. This decision tree is then tested for accuracy on the test set, and this accuracy is reported</li>
 </ul>
 
 ### Creating Dataset
@@ -124,3 +124,9 @@ X, y = make_classification(
 The created dataset is split into a 70 - 30 test train split. The decision tree is trained on the train data with depth 10 (arbitrary depth). For the criterion hyper parameters, both gini and entropy are taken to train different decision trees, ( Which in the end gave the same accuracy on the test dataset)
 
 The metrics such as accuracy precision and recall are outputted
+
+<img src = "../Graphs/output_DTImplement.png"/>
+
+Then Cross validataion was performed and the accuracies for each fold as well as the optimal depth was outputted
+
+<img src = "../Graphs/output_DTIfold.png"/>
