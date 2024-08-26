@@ -76,17 +76,6 @@ def opt_split_attribute(X: pd.DataFrame, y: pd.Series, criterion, features: pd.S
 
     return: attribute to split upon
     """
-    # if(discrete):
-        # maxgain = -float('inf')
-        # maxattr = None
-
-        # for attr in features:
-        #     gain = information_gain(y, X[attr], criterion)
-        #     if gain > maxgain:
-        #         maxgain = gain
-        #         maxattr = attr
-
-        # return maxattr
     
     maxattr = None
     maxgain = -float('inf')
@@ -103,7 +92,6 @@ def opt_split_attribute(X: pd.DataFrame, y: pd.Series, criterion, features: pd.S
 
     return maxattr,split_point
 
-    # According to wheather the features are real or discrete valued and the criterion, find the attribute from the features series with the maximum information gain (entropy or varinace based on the type of output) or minimum gini index (discrete output).
 
     pass
 

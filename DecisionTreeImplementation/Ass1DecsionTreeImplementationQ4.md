@@ -6,8 +6,6 @@ Two types of experiments have been performed, one by varying **N** in the range 
 
 We will observe and discuss all these results below. The code used in obtaining all these graphs can be found in `experiments.py`
 
-**NOTE** : At smaller values, the graphs of $x \times 2^x$ and $x$ look similar.
-
 ## Discrete input Discrete output
 
 <p float="left">
@@ -65,7 +63,7 @@ Theoretically speaking, the method of prediction involves traversing the decisio
   </center>
 </p>
 
-We can see that when keeping one of N and M constant while varying the other gives a linear trend in the time taken to learn the decision tree. For M real features, each node has (N-1) to check per feature worst case (when all values are non unique for that feature) and implementation first sorts the values for that feature, and there are M such features to process to determine the optimal split. Splitting process itself is $O(N)$ So we could say that the theoretical time complexity is $O(N log(N)\times M \times 2^D)$ for a tree of depth D.
+We can see that when keeping one of N and M constant while varying the other gives a linear trend in the time taken to learn the decision tree. For M real features, each node has (N-1) splits to check per feature worst case (when all values are non unique for that feature) and implementation first sorts the values for that feature, and there are M such features to process to determine the optimal split. Splitting process itself is $O(N)$ So we could say that the theoretical time complexity is $O(N log(N)\times M \times 2^D)$ for a tree of depth D.
 $nlog(n)$ curves look similar to n curves and thus our practical observations align with the theoretical time complexity too.
 
 <p float="left">
@@ -88,7 +86,7 @@ Theoretically speaking, the method of prediction involves traversing the decisio
   </center>
 </p>
 
-We can see that when keeping one of N and M constant while varying the other gives a linear trend in the time taken to learn the decision tree. For M real features, each node has (N-1) to check per feature worst case (when all values are non unique for that feature) and implementation first sorts the values for that feature, and there are M such features to process to determine the optimal split. Splitting process itself is $O(N)$ So we could say that the theoretical time complexity is $O(N log(N)\times M \times 2^D)$ for a tree of depth D.
+We can see that when keeping one of N and M constant while varying the other gives a linear trend in the time taken to learn the decision tree. For M real features, each node has (N-1) splits to check per feature worst case (when all values are non unique for that feature) and implementation first sorts the values for that feature, and there are M such features to process to determine the optimal split. Splitting process itself is $O(N)$ So we could say that the theoretical time complexity is $O(N log(N)\times M \times 2^D)$ for a tree of depth D.
 $nlog(n)$ curves look similar to n curves and thus our practical observations align with the theoretical time complexity too.
 
 <p float="left">
