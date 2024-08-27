@@ -12,11 +12,11 @@ from sklearn.model_selection import train_test_split
 np.random.seed(42)
 
 def crossvalidation(X,y):
-    temp = pd.concat([X,y], axis = 1)
-    temp = temp.sample(frac = 1)
+    # temp = pd.concat([X,y], axis = 1)
+    # temp = temp.sample(frac = 1)
 
-    X = temp.iloc[:,:-1]
-    y = temp.iloc[:,-1]
+    # X = temp.iloc[:,:-1]
+    # y = temp.iloc[:,-1]
     k = 5
 
     predictions = {}
@@ -46,6 +46,7 @@ def crossvalidation(X,y):
             validation_end = (j + 1) * inner_fold_size
             validation_set = training_set[validation_start:validation_end]
             validation_labels = training_labels[validation_start:validation_end]
+
             validation_set = pd.DataFrame(validation_set).reset_index(drop  = True)
             validation_labels = pd.Series(validation_labels).reset_index(drop  = True)
             
