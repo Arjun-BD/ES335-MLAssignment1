@@ -22,74 +22,58 @@ from sklearn.model_selection import train_test_split
 
 ```python
 def crossvalidation(X, y):
-    temp = pd.concat([X, y], axis=1)
-    temp = temp.sample(frac=1)
-
-    X = temp.iloc[:, :-1]
-    y = temp.iloc[:, -1]
     k = 5
-
+    fold_size = len(X) // k
 
     accuracies = []
-    fold_size = len(X) // k
 
     for i in range(k):
         test_start = i * fold_size
         test_end = (i + 1) * fold_size
-        test_set = X[test_start:test_end]
-        test_labels = y[test_start:test_end]
+        X_test = X[test_start:test_end].reset_index(drop=True)
+        y_test = y[test_start:test_end].reset_index(drop=True)
 
-        training_set = np.concatenate((X[:test_start], X[test_end:]), axis=0)
-        training_labels = np.concatenate((y[:test_start], y[test_end:]), axis=0)
+        X_train = pd.concat([X[:test_start], X[test_end:]]).reset_index(drop=True)
+        y_train = pd.concat([y[:test_start], y[test_end:]]).reset_index(drop=True)
 
-        training_set = pd.DataFrame(training_set).reset_index(drop=True)
-        training_labels = pd.Series(training_labels).reset_index(drop=True)
-
-        test_set = pd.DataFrame(test_set).reset_index(drop=True)
-        test_labels = pd.Series(test_labels).reset_index(drop=True)
-
-        accuracies_cross_validation = []
+        accuracies_inner_fold = []
 
         for j in range(k):
-            inner_fold_size = int(len(training_set) / k)
+            inner_fold_size = len(X_train) // k
             validation_start = j * inner_fold_size
             validation_end = (j + 1) * inner_fold_size
-            validation_set = training_set[validation_start:validation_end]
-            validation_labels = training_labels[validation_start:validation_end]
-            validation_set = pd.DataFrame(validation_set).reset_index(drop=True)
-            validation_labels = pd.Series(validation_labels).reset_index(drop=True)
 
-            inner_training_set = np.concatenate((training_set[:validation_start], training_set[validation_end:]), axis=0)
-            inner_training_labels = np.concatenate((training_labels[:validation_start], training_labels[validation_end:]), axis=0)
-            inner_training_set = pd.DataFrame(inner_training_set).reset_index(drop=True)
-            inner_training_labels = pd.Series(inner_training_labels).reset_index(drop=True)
+            X_val = X_train[validation_start:validation_end].reset_index(drop=True)
+            y_val = y_train[validation_start:validation_end].reset_index(drop=True)
 
-            accuracy_row = []
+            X_inner_train = pd.concat([X_train[:validation_start], X_train[validation_end:]]).reset_index(drop=True)
+            y_inner_train = pd.concat([y_train[:validation_start], y_train[validation_end:]]).reset_index(drop=True)
+
+            accuracy_depths = []
 
             for depth in range(2, 9):
                 classifier = DecisionTree(max_depth=depth, criterion="gini_index", Type="Classification", discrete_features=False)
-                classifier.fit(inner_training_set, inner_training_labels)
-                res = classifier.predict(validation_set)
-                accuracy_row.append(accuracy(validation_labels, res))
+                classifier.fit(X_inner_train, y_inner_train)
+                predictions_val = classifier.predict(X_val)
 
-            accuracies_cross_validation.append(accuracy_row)
+                accuracy_depths.append(accuracy(y_val, predictions_val))
 
-        accuracies_mean_cross_validation = np.mean(np.array(accuracies_cross_validation), axis=0)
-        optimal_depth = np.argmax(accuracies_mean_cross_validation) + 2
+            accuracies_inner_fold.append(accuracy_depths)
 
-        print(f"Fold {i+1}: Optimal Depth: {optimal_depth:.4f}")
+        mean_accuracies = np.mean(np.array(accuracies_inner_fold), axis=0)
+        optimal_depth = np.argmax(mean_accuracies) + 2
 
-        dt_classifier = DecisionTree(max_depth=optimal_depth, criterion="gini_index", Type="Classification", discrete_features=False)
-        dt_classifier.fit(training_set, training_labels)
+        print("Fold {}: Optimal Depth: {:.4f}".format(i+1, optimal_depth))
 
-        fold_predictions = dt_classifier.predict(test_set)
-        fold_accuracy = np.mean(fold_predictions == test_labels)
+        classifier_final = DecisionTree(max_depth=optimal_depth, criterion="gini_index", Type="Classification", discrete_features=False)
+        classifier_final.fit(X_train, y_train)
+        predictions_test = classifier_final.predict(X_test)
 
-
+        fold_accuracy = accuracy(y_test, predictions_test)
         accuracies.append(fold_accuracy)
 
     for i in range(k):
-        print(f"Fold {i+1}: Accuracy: {accuracies[i]:.4f}")
+        print("Fold {}: Accuracy: {:.4f}".format(i+1, accuracies[i]))
 ```
 
 #### Explanantion of the function
