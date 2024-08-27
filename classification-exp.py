@@ -119,4 +119,4 @@ print("The recall in predicting Class 0 is ", recall(y_test, res, 0))
 print("The recall in predicting Class 1 is ",recall(y_test, res, 1))
 
 
-crossvalidation(X,y)
+# crossvalidation(X,y)

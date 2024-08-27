@@ -123,4 +123,8 @@ X, y = make_classification(
 
 The created dataset is split into a 70 - 30 test train split. The decision tree is trained on the train data with depth 10 (arbitrary depth). For the criterion hyper parameters, both gini and entropy are taken to train different decision trees, ( Which in the end gave the same accuracy on the test dataset)
 
-The metrics such as accuracy precision and recall are outputted
+The metrics such as accuracy precision and recall are outputted and are as follows :
+
+<center>
+    <img src = "../Graphs/classification_exp_results.png">
+</center>

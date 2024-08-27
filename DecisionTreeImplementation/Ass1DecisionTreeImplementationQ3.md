@@ -39,6 +39,7 @@ print("Mean absolute error for sklearn decision tree" ,mae(res, y_test))
 
 The results we obtained are as follows.
 
+<center>
 <img src = "../Graphs/auto_efficiency_results.png"/>
-
+</center>
 We can see that the difference in Mean Absolute error and Root Mean square error from the sklearn implementation and our implementation is pretty small, indicating that our implementation performs well in such regression tasks.
