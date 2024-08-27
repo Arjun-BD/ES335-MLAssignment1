@@ -132,3 +132,9 @@ Then Cross validataion was performed and the accuracies for each fold as well as
 <center>
 <img src = "../Graphs/output_DTIfold.png"/>
 </center>
+
+The results that we get without shuffling the data are as follows
+
+<center>
+<img src = "../Graphs/output_DTInoShuf.png"/>
+</center>
