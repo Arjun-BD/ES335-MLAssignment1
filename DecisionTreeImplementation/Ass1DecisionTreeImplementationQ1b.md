@@ -79,8 +79,6 @@ def crossvalidation(X, y):
 #### Explanantion of the function
 
 <ul>
-<li>Firstly, the dataset is shuffled to ensure that there is no bias in the training dataset or the testing points</li>
-
 <li>The number of Folds is defined to be 5 and the fold size is figured out by dividing the length of the dataframe by the number of folds </li>
 
 <li> We then iterate through each fold,(each with different testing and training datasets)</li>
@@ -117,8 +115,4 @@ Then Cross validataion was performed and the accuracies for each fold as well as
 <img src = "../Graphs/output_DTIfold.png"/>
 </center>
 
-The results that we get without shuffling the data are as follows
-
-<center>
-<img src = "../Graphs/output_DTInoShuf.png"/>
-</center>
+We can see that the optimal depth is calculated to be 2 for most folds.
