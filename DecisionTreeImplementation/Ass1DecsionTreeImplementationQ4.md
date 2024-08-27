@@ -11,8 +11,8 @@ We will observe and discuss all these results below. The code used in obtaining 
 
 <p float="left">
   <center>
-  <img src="../Graphs/M_VAR_DIDOTRAIN.png" width="40%" height = "70%"/>
-  <img src="../Graphs/N_VAR_DIDOTRAIN.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_DIDOTRAIN.png" width="50%" height = "90%"/>
+  <img src="../Graphs/N_VAR_DIDOTRAIN.png" width="50%" height = "90%"/>
   </center>
 </p>
 
@@ -22,8 +22,8 @@ The practical observations also match with the theoritical time complexity.
 
 <p float="left">
   <center>
-  <img src="../Graphs/M_VAR_DIDOTEST.png" width="40%" height = "70%"/>
-  <img src="../Graphs/N_VAR_DIDOTEST.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_DIDOTEST.png" width="50%" height = "90%"/>
+  <img src="../Graphs/N_VAR_DIDOTEST.png" width="50%" height = "90%"/>
   </center>
 </p>
 
@@ -35,8 +35,8 @@ Theoretically speaking, the method of prediction involves traversing the decisio
 
 <p float="left">
   <center>
-  <img src="../Graphs/M_VAR_DIROTRAIN.png" width="40%" height = "70%"/>
-  <img src="../Graphs/N_VAR_DIROTRAIN.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_DIROTRAIN.png" width="50%" height = "90%"/>
+  <img src="../Graphs/N_VAR_DIROTRAIN.png" width="50%" height = "90%"/>
   </center>
 </p>
 
@@ -46,8 +46,8 @@ The practical observations also match with the theoritical time complexity.
 
 <p float="left">
   <center>
-  <img src="../Graphs/M_VAR_DIROTEST.png" width="40%" height = "70%"/>
-  <img src="../Graphs/N_VAR_DIROTEST.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_DIROTEST.png" width="50%" height = "90%"/>
+  <img src="../Graphs/N_VAR_DIROTEST.png" width="50%" height = "90%"/>
   </center>
 </p>
 
@@ -59,8 +59,8 @@ Theoretically speaking, the method of prediction involves traversing the decisio
 
 <p float="left">
   <center>
-  <img src="../Graphs/M_VAR_RIDOTRAIN.png" width="40%" height = "70%"/>
-  <img src="../Graphs/N_VAR_RIDOTRAIN.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_RIDOTRAIN.png" width="50%" height = "90%"/>
+  <img src="../Graphs/N_VAR_RIDOTRAIN.png" width="50%" height = "90%"/>
   </center>
 </p>
 
@@ -69,8 +69,8 @@ $nlog(n)$ curves look similar to n curves and thus our practical observations al
 
 <p float="left">
   <center>
-  <img src="../Graphs/M_VAR_RIDOTEST.png" width="40%" height = "70%"/>
-  <img src="../Graphs/N_VAR_RIDOTEST.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_RIDOTEST.png" width="50%" height = "90%"/>
+  <img src="../Graphs/N_VAR_RIDOTEST.png" width="50%" height = "90%"/>
   </center>
 </p>
 
@@ -82,8 +82,8 @@ Theoretically speaking, the method of prediction involves traversing the decisio
 
 <p float="left">
   <center>
-  <img src="../Graphs/M_VAR_RIROTRAIN.png" width="40%" height = "70%"/>
-  <img src="../Graphs/N_VAR_RIROTRAIN.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_RIROTRAIN.png" width="50%" height = "90%"/>
+  <img src="../Graphs/N_VAR_RIROTRAIN.png" width="50%" height = "90%"/>
   </center>
 </p>
 
@@ -92,8 +92,8 @@ $nlog(n)$ curves look similar to n curves and thus our practical observations al
 
 <p float="left">
   <center>
-  <img src="../Graphs/M_VAR_RIROTEST.png" width="40%" height = "70%"/>
-  <img src="../Graphs/N_VAR_RIROTEST.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_RIROTEST.png" width="50%" height = "90%"/>
+  <img src="../Graphs/N_VAR_RIROTEST.png" width="50%" height = "90%"/>
   </center>
 </p>
 
