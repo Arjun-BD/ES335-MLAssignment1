@@ -2,7 +2,8 @@
 
 We have performed several experiments to verify the time-complexity of learning the decision tree and prediciting test data from the learned decision tree. We have used a dataset of **N** rows and **M** features(in case of discrete features, we have used only binary features) for training the decision tree. For prediction using the decison tree, we have used the same **N** samples.
 
-Two types of experiments have been performed, one by varying **N** in the range [10,30,50,70,100] while keeping **M** constant at a value 10. Another by varying in **M** the range [5,10,15,20,25] while keeping **N** constant at 20. When N is varied, depth is kept constant at d = 10, but when m is varied, we have set infinite depth for the tree. Each experiment for a particular M and N is run for 100 times and then the average is taken.
+Two types of experiments have been performed, one by varying **N** in the range [10,30,50,70,100] while keeping **M** constant at a value 10. Another by varying in **M** the range [5,10,15,20,25] while keeping **N** constant at 20.
+Note that for every experiment , `max_depth` is set to 10. Each experiment for a particular M and N is run for 100 times and then the average and standard deviation are noted down for plotting the graphs.
 
 We will observe and discuss all these results below. The code used in obtaining all these graphs can be found in `experiments.py`
 
@@ -10,8 +11,8 @@ We will observe and discuss all these results below. The code used in obtaining 
 
 <p float="left">
   <center>
-  <img src="../Graphs/m_var_DIDO_train.png" width="40%" height = "70%"/>
-  <img src="../Graphs/n_var_DIDO_train.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_DIDOTRAIN.png" width="40%" height = "70%"/>
+  <img src="../Graphs/N_VAR_DIDOTRAIN.png" width="40%" height = "70%"/>
   </center>
 </p>
 
@@ -21,12 +22,12 @@ The practical observations also match with the theoritical time complexity.
 
 <p float="left">
   <center>
-  <img src="../Graphs/m_var_DIDO_test.png" width="40%" height = "70%"/>
-  <img src="../Graphs/n_var_DIDO_test.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_DIDOTEST.png" width="40%" height = "70%"/>
+  <img src="../Graphs/N_VAR_DIDOTEST.png" width="40%" height = "70%"/>
   </center>
 </p>
 
-We can see no clear trend in time taken to predict when varying **M** and we coulld very well say the times taken are almost the same. Whereas a clear linear pattern is present in the case where we vary **N**. This suggests the time complexity is independent of M and depends only on **N**.
+We can see a somwhat constant trend in time taken to predict when varying **M** and we coulld very well say the times taken are almost the same. Whereas a clear linear pattern is present in the case where we vary **N**. This suggests the time complexity is independent of M and depends only on **N**.
 
 Theoretically speaking, the method of prediction involves traversing the decision tree and thus depends on the depth of the decison tree and the number of predictions to make, so the time complexity to predict **N** samples is $O(N \times D)$ where D is the depth of the tree.
 
@@ -34,8 +35,8 @@ Theoretically speaking, the method of prediction involves traversing the decisio
 
 <p float="left">
   <center>
-  <img src="../Graphs/m_var_DIRO_train.png" width="40%" height = "70%"/>
-  <img src="../Graphs/n_var_DIRO_train.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_DIROTRAIN.png" width="40%" height = "70%"/>
+  <img src="../Graphs/N_VAR_DIROTRAIN.png" width="40%" height = "70%"/>
   </center>
 </p>
 
@@ -45,12 +46,12 @@ The practical observations also match with the theoritical time complexity.
 
 <p float="left">
   <center>
-  <img src="../Graphs/m_var_DIRO_test.png" width="40%" height = "70%"/>
-  <img src="../Graphs/n_var_DIRO_test.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_DIROTEST.png" width="40%" height = "70%"/>
+  <img src="../Graphs/N_VAR_DIROTEST.png" width="40%" height = "70%"/>
   </center>
 </p>
 
-We can see no clear trend in time taken to predict when varying **M** and we coulld very well say the times taken are almost the same. Whereas a clear linear pattern is present in the case where we vary **N**. This suggests the time complexity is independent of M and depends only on **N**.
+We can see a somwhat constant trend in time taken to predict when varying **M** and we coulld very well say the times taken are almost the same. Whereas a clear linear pattern is present in the case where we vary **N**. This suggests the time complexity is independent of M and depends only on **N**.
 
 Theoretically speaking, the method of prediction involves traversing the decision tree and thus depends on the depth of the decison tree and the number of predictions to make, so the time complexity to predict **N** samples is $O(N \times D)$ where D is the depth of the tree.
 
@@ -58,8 +59,8 @@ Theoretically speaking, the method of prediction involves traversing the decisio
 
 <p float="left">
   <center>
-  <img src="../Graphs/m_var_RIDO_train.png" width="40%" height = "70%"/>
-  <img src="../Graphs/n_var_RIDO_train.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_RIDOTRAIN.png" width="40%" height = "70%"/>
+  <img src="../Graphs/N_VAR_RIDOTRAIN.png" width="40%" height = "70%"/>
   </center>
 </p>
 
@@ -68,12 +69,12 @@ $nlog(n)$ curves look similar to n curves and thus our practical observations al
 
 <p float="left">
   <center>
-  <img src="../Graphs/m_var_RIDO_test.png" width="40%" height = "70%"/>
-  <img src="../Graphs/n_var_RIDO_test.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_RIDOTEST.png" width="40%" height = "70%"/>
+  <img src="../Graphs/N_VAR_RIDOTEST.png" width="40%" height = "70%"/>
   </center>
 </p>
 
-We can see no clear trend in time taken to predict when varying **M** and we coulld very well say the times taken are almost the same. Whereas a clear linear pattern is present in the case where we vary **N**. This suggests the time complexity is independent of M and depends only on **N**.
+We can see a somwhat constant trend in time taken to predict when varying **M** and we coulld very well say the times taken are almost the same. Whereas a clear linear pattern is present in the case where we vary **N**. This suggests the time complexity is independent of M and depends only on **N**.
 
 Theoretically speaking, the method of prediction involves traversing the decision tree and thus depends on the depth of the decison tree and the number of predictions to make, so the time complexity to predict **N** samples is $O(N \times D)$ where D is the depth of the tree.
 
@@ -81,8 +82,8 @@ Theoretically speaking, the method of prediction involves traversing the decisio
 
 <p float="left">
   <center>
-  <img src="../Graphs/m_var_RIRO_train.png" width="40%" height = "70%"/>
-  <img src="../Graphs/n_var_RIRO_train.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_RIROTRAIN.png" width="40%" height = "70%"/>
+  <img src="../Graphs/N_VAR_RIROTRAIN.png" width="40%" height = "70%"/>
   </center>
 </p>
 
@@ -91,11 +92,11 @@ $nlog(n)$ curves look similar to n curves and thus our practical observations al
 
 <p float="left">
   <center>
-  <img src="../Graphs/m_var_RIRO_test.png" width="40%" height = "70%"/>
-  <img src="../Graphs/n_var_RIRO_test.png" width="40%" height = "70%"/>
+  <img src="../Graphs/M_VAR_RIROTEST.png" width="40%" height = "70%"/>
+  <img src="../Graphs/N_VAR_RIROTEST.png" width="40%" height = "70%"/>
   </center>
 </p>
 
-We can see no clear trend in time taken to predict when varying **M** and we coulld very well say the times taken are almost the same. Whereas a clear linear pattern is present in the case where we vary **N**. This suggests the time complexity is independent of M and depends only on **N**.
+We can see a somwhat constant trend in time taken to predict when varying **M** and we coulld very well say the times taken are almost the same. Whereas a clear linear pattern is present in the case where we vary **N**. This suggests the time complexity is independent of M and depends only on **N**.
 
 Theoretically speaking, the method of prediction involves traversing the decision tree and thus depends on the depth of the decison tree and the number of predictions to make, so the time complexity to predict **N** samples is $O(N \times D)$ where D is the depth of the tree.

@@ -68,8 +68,7 @@ def calc_time(type : str, N : int , M : int, depth : int):
         times_predict.append(time.perf_counter() - start)
 
 
-    return np.mean(np.array(times_learn)), np.mean(np.array(times_predict))
-
+    return np.mean(np.array(times_learn)), np.mean(np.array(times_predict)) , np.std(np.array(times_learn)), np.std(np.array(times_predict))
 
 n = [10,30,50,70,100]
 m = [5,10,15,20,25]
@@ -79,20 +78,26 @@ def plot_results_vary_n(n : list, j : str):
         np.random.seed(42)
         results_fit = []
         results_predict = []
+        results_fit_std = []
+        results_predict_std = []
         for i in n:
-            time_fit, time_predict = calc_time(type = j, N = i,  M = 10, depth=10)
+            time_fit, time_predict, time_fit_std, time_predict_std = calc_time(type = j, N = i,  M = 10, depth=10)
             results_fit.append(time_fit)
             results_predict.append(time_predict)
+            results_fit_std.append(time_fit_std)
+            results_predict_std.append(time_predict_std)
             print("done")
 
         plt.figure(figsize=(10,10))
         plt.plot(n, results_fit)
+        plt.errorbar(n , results_fit ,yerr = results_fit_std, fmt ='o')
         plt.title("N is varied, keeping M constant at value 10")
         plt.xlabel("N")
         plt.ylabel(f"Time taken to learn the decision tree, type = {j}")
   
         plt.figure(figsize=(10,10))
         plt.plot(n, results_predict)
+        plt.errorbar(n , results_predict ,yerr = results_predict_std, fmt ='o')
         plt.title("N is varied, keeping M constant at value 10")
         plt.xlabel("N")
         plt.ylabel(f"Time taken to for the decision tree to predict, type = {j}")
@@ -103,30 +108,32 @@ def plot_results_vary_m(n : list, j : str):
         np.random.seed(42)
         results_fit = []
         results_predict = []
+        results_fit_std = []
+        results_predict_std = []
         for i in n:
-            time_fit, time_predict = calc_time(type = j, N = 20 , M = i , depth = float('inf'))
+            time_fit, time_predict, time_fit_std, time_predict_std = calc_time(type = j, N = 20 , M = i , depth = 10)
             results_fit.append(time_fit)
             results_predict.append(time_predict)
+            results_fit_std.append(time_fit_std)
+            results_predict_std.append(time_predict_std)
             print("done")
 
         plt.figure(figsize=(10,10))
         plt.plot(n, results_fit)
+        plt.errorbar(n , results_fit ,yerr = results_fit_std, fmt ='o')
         plt.title("M is varied, keeping N constant at value 20")
-        plt.xlabel("N")
+        plt.xlabel("M")
         plt.ylabel(f"Time taken to learn the decision tree, type = {j}")
   
         plt.figure(figsize=(10,10))
         plt.plot(n, results_predict)
+        plt.errorbar(n , results_predict ,yerr = results_predict_std, fmt ='o')
         plt.title("M is varied, keeping N constant at value 20")
-        plt.xlabel("N")
+        plt.xlabel("M")
         plt.ylabel(f"Time taken to for the decision tree to predict, type = {j}")
     
         plt.show()
 
-plot_results_vary_m(m, "DIDO")
-# ...
 
-
-# Other functions
-# ...
-# Run the functions, Learn the DTs and Show the results/plots
+##plotting the results for different values of N and M for different types of decision trees
+plot_results_vary_m(m, "RIRO")

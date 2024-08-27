@@ -125,8 +125,10 @@ The created dataset is split into a 70 - 30 test train split. The decision tree 
 
 The metrics such as accuracy precision and recall are outputted
 
+<center>
 <img src = "../Graphs/output_DTImplement.png"/>
-
+</center>
 Then Cross validataion was performed and the accuracies for each fold as well as the optimal depth was outputted
-
+<center>
 <img src = "../Graphs/output_DTIfold.png"/>
+</center>
