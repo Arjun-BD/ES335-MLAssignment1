@@ -87,7 +87,7 @@ class DecisionTree:
         for index, row in X.iterrows(): #iterate over the rows of the test data and traverse the tree to find the predicted value
             node = self.rootNode
             while node.left is not None and node.right is not None:
-                if row.iloc[node.split_on] > node.split_value:
+                if row[node.split_on] > node.split_value:
                     node = node.left
                 else:
                     node = node.right
