@@ -2,9 +2,9 @@
 
 The folder `Combined` has been made by running the script `CombineScript.py`, which contains raw accelerometer data of different subjects split into train and test folders. The data for each activity is stored in its respective named folders and contains CSV files by the subject.
 
-The folder Decision Tree Implementation contains 3 markdown files explaining the questions asked in the Decision Tree implementation section, which are aptly labeled as per question.
+The folder `DecisionTreeImplementation` contains 3 markdown files explaining the questions asked in the Decision Tree implementation section, which are aptly labeled as per question.
 
-The folder HAR contains the UCI HAR Dataset, which is the featurised dataset we have been provided with. The Python file "MakeDataset.py" saves numpy arrays of the raw accelerometer data. These numpy arrays are `X_test.npy`, `X_train.npy`, `y_test.npy`, `y_train.npy`.
+The folder `HAR` contains the UCI HAR Dataset, which is the featurised dataset we have been provided with. The Python file "MakeDataset.py" saves numpy arrays of the raw accelerometer data. These numpy arrays are `X_test.npy`, `X_train.npy`, `y_test.npy`, `y_train.npy`.
 
 The folder `Graphs` contains images and graphs used in the markdown files.
 
