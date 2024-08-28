@@ -12,7 +12,7 @@ The folder `Task1` contains the answers to Task 1 of the Assignment. Each of the
 
 The folder `task2` contains answers to Task2. All the subquestions are answered in the file. All answers are in the file `Ass1Task2.ipynb`.
 
-The folder `Task3` contains task 3. The file `zeroshot-fewshot-new.ipynb` contains the answers to the questions, while the file `fewshot_scratch.ipynb` contains some experiments that we did to increase fewshot accuracy.
+The folder `Task3` contains task 3. The file `Ass1Task3.ipynb` contains the answers to the questions, while the file `fewshot_scratch.ipynb` contains some experiments that we did to increase fewshot accuracy.
 
 The folder `Task4` contains answers to Task 4 questions 1 and 2, where the decision tree has been implemented for the data we recorded.
 
