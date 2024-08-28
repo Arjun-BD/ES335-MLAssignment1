@@ -46,7 +46,7 @@ def rmse(y_hat: pd.Series, y: pd.Series) -> float:
     """
     Function to calculate the root-mean-squared-error(rmse)
     """
-    z = math.sqrt((abs(y_hat - y)**2).sum()/len(y))
+    z = math.sqrt(((y_hat - y)**2).sum()/len(y))
     return z
     pass
 

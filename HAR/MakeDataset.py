@@ -20,7 +20,7 @@ offset = 100
 folders = ["LAYING","SITTING","STANDING","WALKING","WALKING_DOWNSTAIRS","WALKING_UPSTAIRS"]
 classes = {"WALKING":1,"WALKING_UPSTAIRS":2,"WALKING_DOWNSTAIRS":3,"SITTING":4,"STANDING":5,"LAYING":6}
 
-combined_dir = os.path.join(r"D:\All other stuffs\Academics\ML\ES335-MLAssignment1\Combined")
+combined_dir = os.path.join(r"Combined")
 
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                                                 # Train Dataset
@@ -28,7 +28,7 @@ combined_dir = os.path.join(r"D:\All other stuffs\Academics\ML\ES335-MLAssignmen
 
 X_train=[]
 y_train=[]
-dataset_dir = os.path.join(combined_dir,r"D:\All other stuffs\Academics\ML\ES335-MLAssignment1\Combined\Train")
+dataset_dir = os.path.join(combined_dir,r"Train")
 
 for folder in folders:
     files = os.listdir(os.path.join(dataset_dir,folder))
@@ -50,7 +50,7 @@ y_train = np.array(y_train)
 
 X_test=[]
 y_test=[]
-dataset_dir = os.path.join(combined_dir,r"D:\All other stuffs\Academics\ML\ES335-MLAssignment1\Combined\Test")
+dataset_dir = os.path.join(combined_dir,r"Test")
 
 for folder in folders:
     files = os.listdir(os.path.join(dataset_dir,folder))
@@ -82,4 +82,7 @@ print("Training data shape: ",X_train.shape)
 print("Testing data shape: ",X_test.shape)
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-
+np.save('X_train.npy', X_train)
+np.save('X_test.npy', X_test)
+np.save('y_train.npy', y_train)
+np.save('y_test.npy', y_test)
